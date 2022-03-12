@@ -1,0 +1,156 @@
+Arpan Maji
+------------------------------------------------
+https://github.com/MrDataScientist/Nodejs-10-projects-examples
+https://www.codementor.io/mayowa.a/how-to-build-a-simple-session-based-authentication-system-with-nodejs-from-scratch-6vn67mcy3
+http://danialk.github.io/blog/2013/02/20/simple-authentication-in-nodejs/
+https://app.pluralsight.com/library/courses/building-angular-application-node-token-authentication/table-of-contents
+
+
+(1) Install Express Generator globally
+
+	-> `npm install express-generator -g`
+	
+(2) Create Your Node JS Project via Express Generator
+
+	-> `express --view=hbs myapp`   (--views such as: ejs,hbs,pug,dust)
+	
+(3) Install all dependencies
+
+	-> Change directory to your projext folder & run below command
+		`npm install`
+	
+(4) Run the project
+	
+	-> `npm start`  or
+	-> `SET DEBUG=myfirstapp:* & npm start`
+
+(5) Install Sequelize CLI globally (Run the SQL scripts internally means create models, make migrations etc)
+	
+	->  `npm install -g sequelize-cli`
+	
+(6) Install Sequelize ORM 
+
+	-> `npm install --save sequelize`
+	
+(7) Initialize the ORM
+
+	->  `sequelize init`
+	
+	This commands create 3 folders. Such as:
+	a) config/config.json
+	b) models
+	c) migrations
+	d) seeders
+	
+(8) Setup app.js
+	-> Install required packages(e.g. body-parser,express-hbs,express-session etc.)
+(9) Creates Views and its respective routes
+(10) Make partials folder & include common parts of the website like -
+	a) Header
+	b) Sidebar
+	c) Footer 
+
+(11) Install Mysql Driver 
+
+	-> `npm install --save mysql2`
+	
+(12) Set up the passport authentication
+	
+	-> `npm install --save passport`
+	-> `npm install --save passport-local`
+	
+(13) Configure Database to the application
+
+	-> Create Database for your application via php8yadmin or any other SQL based GUI like Heidi SQL,MYSQL Workbench,PG ADMIN III,MongoLab,Robo3T(formerly-RoboMongo)
+	-> Enter your database credential to "config/config.json" 
+	
+(14) Model Creation(Create application's table)
+	
+	-> You can create the model via below command
+		`sequelize model:create --name tablename --attributes field_name1:data_type1,field_name2:data_type2,field_name3:data_type3...so on`
+		
+		ex- `sequelize model:create --name user --attributes first_name:string,last_name:string,email:string,password:string,mobile_no:string`
+		ex- `sequelize model:generate --models-path models/user --name user --attributes first_name:string,last_name:string,email:string,password:string,mobile_no:string`
+		
+	-> (The command creates 2 files - 1)model/modelname.js 2) migrations\20180813120546-user.js)
+		
+(15) Migration the Database
+	
+	-> `sequelize db:migrate`
+	
+	-> The command populates the model with your database.
+	
+(16) Passport Setup
+
+(17)  Declaration Passport JS
+
+	-> Declare passport js to app.js (Entry Point of application)
+	-> Check for passport authentication (Make a middlwware)
+	
+(18) Passport Local Login Set Up
+
+	-> You have to create a route as a post method 
+	
+	E.g.-
+	
+	module.exports = function (app, passport) {
+	  app.post('/login', passport.authenticate('local-login', {
+		  successRedirect: '/dashboard', // redirect to the secure profile section
+		  failureRedirect: '/', // redirect back to the signup page if there is an error
+		  failureFlash: true // allow flash messages
+		}),
+		function (req, res) {
+
+		});
+		
+(19) Set up Logout Module 
+
+	-> You have destroy the session through below syntax
+	
+	E.g.- 
+	
+	app.get('/logout', function(req, res) {
+	  req.logout();
+	  res.redirect('/');
+	 });
+
+
+	 
+Gravatar (Default Profile Image)
+---------------------------------
+
+	-> npm i gravatar --save 
+	
+	-> You can give the default profile image if someone forgot to upload his/her profile image.
+	
+	
+Multer
+---------------------------------
+
+	-> npm i multer --save
+	
+	-> For image uploading(.csv,.xls,.doc) we have to use multer & remember one thing that you have to set the form enc-type= "multpart/form-data"
+
+(20) Seed generation
+	-> sequelize seed:generate --name write name
+		ex- sequelize seed:generate --name test
+(21) Run seeder
+	-> sequelize db:seed
+
+Sequelize Commands
+-------------------
+	 
+(1) Migration File
+	
+	-> sequelize migration:create --name add_column_to_user_table
+	-> npx sequelize migration:generate --name add_google_id_and_microsoft_id_client_user_table
+	
+(2) Migrate the migration File
+	
+	-> sequelize db:migrate
+
+sequelize migration:create --name changeColumn
+
+
+
+sequelize.fn('nextval', sequelize.col('seq_nos')),'seq'
